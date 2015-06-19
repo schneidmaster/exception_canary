@@ -29,5 +29,7 @@ ActiveRecord::Schema.define(version: 20_150_615_201_509) do
     t.string 'environment'
     t.string 'variables'
     t.string 'klass'
+    t.datetime 'created_at',  null: false
+    t.datetime 'updated_at',  null: false
   end
 end

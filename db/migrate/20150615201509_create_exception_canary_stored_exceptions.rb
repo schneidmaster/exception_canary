@@ -7,6 +7,7 @@ class CreateExceptionCanaryStoredExceptions < ActiveRecord::Migration
       t.string :environment
       t.string :variables
       t.string :klass
+      t.timestamps null: false
     end
   end
 end

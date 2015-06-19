@@ -5,7 +5,10 @@
 /coverage/
 /doc/
 /pkg/
+/spec/dummy/config/log/*.log
+/spec/dummy/config/tmp/
 /spec/dummy/db/*.sqlite3
 /spec/dummy/log/*.log
+/spec/dummy/tmp/cache/
 /spec/reports/
 /tmp/
