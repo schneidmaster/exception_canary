@@ -27,6 +27,8 @@ module ExceptionCanary
           return rule.suppress?
         end
       end
+      se.rule = Rule.create!(name: se.title, action: Rule::ACTION_SUPPRESS, match_type: Rule::MATCH_TYPE_EXACT, value: se.title)
+      se.save!
       false
     end
   end
