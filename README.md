@@ -32,12 +32,13 @@ Rules are applied in order - if rule #1 and rule #5 (in order as viewed in the d
 
 ## Running Tests
 
-exception_canary uses appraisal to test against multiple versions of Rails/ActiveRecord. You'll need to set up the database, install dependencies, and run specs like so:
+exception_canary uses appraisal to test against multiple versions of Rails. You'll need to set up the database, install dependencies, and run specs like so:
 
-1. rake db:migrate
-2. rake app:db:test:prepare
-3. appraisal install
-4. appraisal rspec
+    $ rake db:create
+    $ rake db:migrate
+    $ rake app:db:test:prepare
+    $ appraisal install
+    $ appraisal rspec
 
 ## Authorship
 
