@@ -5,7 +5,6 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'byebug'
-require 'exception_canary'
 require 'factory_girl_rails'
 require 'rspec/rails'
 
