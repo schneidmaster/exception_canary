@@ -11,25 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615201509) do
-
-  create_table "exception_canary_rules", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "action"
-    t.integer  "match_type"
-    t.string   "value"
-    t.boolean  "is_active",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+ActiveRecord::Schema.define(version: 20_150_615_201_509) do
+  create_table 'exception_canary_rules', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'action'
+    t.integer 'match_type'
+    t.string 'value'
+    t.boolean 'is_active',  default: false
+    t.datetime 'created_at',                 null: false
+    t.datetime 'updated_at',                 null: false
   end
 
-  create_table "exception_canary_stored_exceptions", force: :cascade do |t|
-    t.integer "rule_id"
-    t.string  "title"
-    t.string  "backtrace"
-    t.string  "environment"
-    t.string  "variables"
-    t.string  "klass"
+  create_table 'exception_canary_stored_exceptions', force: :cascade do |t|
+    t.integer 'rule_id'
+    t.string 'title'
+    t.string 'backtrace'
+    t.string 'environment'
+    t.string 'variables'
+    t.string 'klass'
   end
-
 end

@@ -1,6 +1,6 @@
  [![Build Status](https://travis-ci.org/schneidmaster/exception_canary.svg?branch=master)](https://travis-ci.org/schneidmaster/exception_canary)
 
- # exception_canary
+# exception_canary
 
 exception_canary is a mountable, configurable Rails engine to notify you only of new or important exceptions in your application, designed as a drop-in replacement (actually scaffolding) for [exception_notification](https://github.com/smartinez87/exception_notification). and [exception_notification-rake](https://github.com/nikhaldi/exception_notification-rake).
 

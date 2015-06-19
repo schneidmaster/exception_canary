@@ -20,16 +20,10 @@ module ExceptionCanary
     end
 
     def suppress_exception?(se)
-      Rule.active.each do |rule|
-        if rule.matches?(se)
-          se.rule = rule
-          se.save!
-          return rule.suppress?
-        end
-      end
-      se.rule = Rule.create!(name: se.title, action: Rule::ACTION_SUPPRESS, match_type: Rule::MATCH_TYPE_EXACT, value: se.title)
+      se.rule = Rule.active.find { |r| r.matches?(se) }
+      se.rule ||= Rule.create!(name: se.title, action: Rule::ACTION_NOTIFY, match_type: Rule::MATCH_TYPE_EXACT, value: se.title)
       se.save!
-      false
+      se.rule.suppress?
     end
   end
 end

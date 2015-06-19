@@ -1,8 +1,13 @@
 language: ruby
 rvm:
   - 2.2.0
+install:
+  - gem uninstall bundler
+  - gem install bundler --version '1.8.5'
+  - bundle
+  - bundle exec appraisal install
 before_script:
   - bundle exec rake app:db:test:prepare
-  - bundle exec appraisal install
 script:
   - bundle exec appraisal rspec
+  - bundle exec rubocop
