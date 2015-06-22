@@ -9,6 +9,6 @@
 /spec/dummy/config/tmp/
 /spec/dummy/db/*.sqlite3
 /spec/dummy/log/*.log
-/spec/dummy/tmp/cache/
+/spec/dummy/tmp/
 /spec/reports/
 /tmp/

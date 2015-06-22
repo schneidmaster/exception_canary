@@ -37,8 +37,7 @@ exception_canary uses appraisal to test against multiple versions of Rails. You'
     $ rake db:create
     $ rake db:migrate
     $ rake app:db:test:prepare
-    $ appraisal install
-    $ appraisal rspec
+    $ rspec
 
 ## Authorship
 
