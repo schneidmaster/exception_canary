@@ -26,5 +26,5 @@
 <% unless @rule.exceptions_count == 0 %>
   <hr>
   <h4>Matched Exceptions</h4>
-  <%= render partial: 'exception_canary/stored_exceptions/table', locals: { stored_exceptions: @stored_exceptions } %>
+  <%= render partial: 'exception_canary/stored_exceptions/table', locals: { stored_exceptions: @stored_exceptions, hide_rule: true } %>
 <% end %>

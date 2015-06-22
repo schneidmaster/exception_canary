@@ -45,6 +45,12 @@ feature 'Rules' do
       expect(page).to have_content("Stored Exception: #{rule.stored_exceptions.last.title}")
     end
 
+    it 'does not link to rule' do
+      within 'table:last' do
+        expect(page).not_to have_content("Rule: #{rule.name}")
+      end
+    end
+
     it 'paginates stored exceptions' do
       expect(page).not_to have_content('Prev')
       click_on 'Next'
