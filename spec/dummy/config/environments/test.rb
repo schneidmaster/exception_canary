@@ -40,7 +40,7 @@ Dummy::Application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Required for tests to pass in Rails 3.
+  # Required for Rails 3.
   config.assets.enabled = true
   config.secret_token = 'k2114xt0GjwDi144950gO2er1619i06V'
 end
