@@ -23,6 +23,9 @@
   </tbody>
 </table>
 
+<%= link_to 'Edit', edit_rule_path(@rule) %>
+<%= link_to 'Delete', rule_path(@rule), method: :delete, data: { confirm: 'Are you sure?' } %>
+
 <% unless @rule.exceptions_count == 0 %>
   <hr>
   <h4>Matched Exceptions</h4>

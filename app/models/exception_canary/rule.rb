@@ -2,6 +2,11 @@ module ExceptionCanary
   class Rule < ActiveRecord::Base
     has_many :stored_exceptions
 
+    validates :name, presence: true
+    validates :action, presence: true
+    validates :match_type, presence: true
+    validates :value, presence: true
+
     scope :active, -> { where(is_active: true) }
 
     calculated :exceptions_count, -> { 'select count(*) from exception_canary_stored_exceptions where exception_canary_stored_exceptions.rule_id = exception_canary_rules.id' }
