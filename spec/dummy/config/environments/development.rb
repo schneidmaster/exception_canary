@@ -26,7 +26,7 @@ Dummy::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  
+
   # Required for Rails 3.
   config.assets.enabled = true
   config.secret_token = 'k2114xt0GjwDi144950gO2er1619i06V'

@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - db/**/*
+    - spec/dummy/db/**/*
 
 BlockNesting: 
   Max: 4
