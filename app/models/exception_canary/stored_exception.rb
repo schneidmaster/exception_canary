@@ -9,7 +9,7 @@ module ExceptionCanary
       if backtrace.length < 300
         backtrace
       else
-        "#{backtrace[0..297]}..."
+        "#{backtrace[0...297]}..."
       end
     end
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExceptionCanary, type: :feature do
+feature 'Exception suppression' do
   it 'records an exception' do
     begin
       visit '/some_action'
