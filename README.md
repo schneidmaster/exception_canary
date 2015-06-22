@@ -4,6 +4,8 @@
 
 exception_canary is a mountable, configurable Rails engine to notify you only of new or important exceptions in your application, designed as a drop-in replacement (actually scaffolding) for [exception_notification](https://github.com/smartinez87/exception_notification). and [exception_notification-rake](https://github.com/nikhaldi/exception_notification-rake).
 
+**Only compatible with Rails 3 - no present Rails 4 support.**
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -28,11 +30,9 @@ Specifically, check out the [Getting Started](https://github.com/smartinez87/exc
 
 Next, you will need to mount exception_canary's admin interface in your application. This allows you to see and manipulate rules and stored exceptions. exception_canary stores all exceptions in the database to permit you to retroactively search them, apply rules, or recover data if something is being suppressed when it shouldn't be.
 
-Rules are applied in order - if rule #1 and rule #5 (in order as viewed in the dashboard) both match an exception, rule #5's action will be taken.
-
 ## Running Tests
 
-exception_canary uses appraisal to test against multiple versions of Rails. You'll need to set up the database, install dependencies, and run specs like so:
+You'll need to set up the database, install dependencies, and run specs like so:
 
     $ rake db:create
     $ rake db:migrate
