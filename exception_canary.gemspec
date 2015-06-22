@@ -16,14 +16,15 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'calculated_attributes'
   spec.add_dependency 'coffee-rails'
   spec.add_dependency 'exception_notification', '>= 3.0.1'
   spec.add_dependency 'exception_notification-rake', '>= 0.0.5'
   spec.add_dependency 'jquery-rails'
+  spec.add_dependency 'kaminari', '0.15.1'
   spec.add_dependency 'less-rails'
   spec.add_dependency 'less-rails-bootstrap', '~> 2.3.3'
   spec.add_dependency 'rails', '~> 3.2.21'
-  spec.add_dependency 'react-rails'
   spec.add_dependency 'therubyracer'
 
   spec.add_development_dependency 'bundler', '~> 1.8'

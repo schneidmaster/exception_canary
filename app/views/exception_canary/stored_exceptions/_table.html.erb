@@ -1,0 +1,30 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Timestamp</th>
+      <th>Title</th>
+      <th>Class</th>
+      <th>Backtrace</th>
+      <th>Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stored_exceptions.each do |se| %>
+      <tr>
+        <td><%= link_to se.created_at, se %></td>
+        <td><%= se.title %></td>
+        <td><%= se.klass %></td>
+        <td><%= se.backtrace_summary %></td>
+        <td>
+          <% if se.rule %>
+            <%= link_to se.rule.name, se.rule %>
+          <% else %>
+            None
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @stored_exceptions %>

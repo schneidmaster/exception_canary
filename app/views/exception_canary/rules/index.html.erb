@@ -1,0 +1,26 @@
+<% content_for :title, 'Rules' %>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Action</th>
+      <th>Match Type</th>
+      <th>Value</th>
+      <th>Active?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rules.each do |rule| %>
+      <tr>
+        <td><%= link_to rule.name, rule %></td>
+        <td><%= action_name(rule.action) %></td>
+        <td><%= match_type_name(rule.match_type) %></td>
+        <td><%= rule.value %></td>
+        <td><%= active?(rule.is_active) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @rules %>

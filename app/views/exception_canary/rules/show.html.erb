@@ -1,0 +1,30 @@
+<% content_for :title, "Rule: #{@rule.name}" %>
+
+<h4><%= @rule.name %></h4>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>Match Type</th>
+      <th>Value</th>
+      <th>Is Active?</th>
+      <th>Matched Exceptions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= action_name(@rule.action) %></td>
+      <td><%= match_type_name(@rule.match_type) %></td>
+      <td><%= @rule.value %></td>
+      <td><%= active?(@rule.is_active) %></td>
+      <td><%= @rule.exceptions_count %>
+    </tr>
+  </tbody>
+</table>
+
+<% unless @rule.exceptions_count == 0 %>
+  <hr>
+  <h4>Matched Exceptions</h4>
+  <%= render partial: 'exception_canary/stored_exceptions/table', locals: { stored_exceptions: @stored_exceptions } %>
+<% end %>

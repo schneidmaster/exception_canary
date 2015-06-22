@@ -2,10 +2,11 @@ module ExceptionCanary
   class Dashboard < ::Rails::Engine
     isolate_namespace ExceptionCanary
 
+    require 'calculated_attributes'
     require 'less-rails'
     require 'less-rails-bootstrap'
-    require 'react-rails'
     require 'jquery-rails'
+    require 'kaminari'
 
     # TODO: use rake exception_canary:install:migrations instead
     initializer :append_migrations do |app|

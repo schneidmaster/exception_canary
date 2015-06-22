@@ -1,20 +1,3 @@
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Timestamp</th>
-      <th>Title</th>
-      <th>Class</th>
-      <th>Backtrace</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @stored_exceptions.each do |se| %>
-      <tr>
-        <td><%= se.created_at %></td>
-        <td><%= se.title %></td>
-        <td><%= se.klass %></td>
-        <td><%= se.backtrace_summary %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% content_for :title, 'Stored Exceptions' %>
+
+<%= render partial: 'table', locals: { stored_exceptions: @stored_exceptions } %>

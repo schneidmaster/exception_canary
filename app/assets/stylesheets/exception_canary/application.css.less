@@ -1,0 +1,43 @@
+@import 'twitter/bootstrap';
+
+body.exception-canary {
+  nav {
+    div {
+      padding: 15px;
+
+      &.left {
+        float: left;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      &.right {
+        float: right;
+
+        ul li {
+          float: left;
+          list-style-type: none;
+          padding-left: 5px;
+
+          &.divider:before {
+            content: '|';
+          }
+        }
+      }
+    }
+
+    hr {
+      clear: both;
+    }
+  }
+
+  main {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+
+    table {
+      border: solid 1px black;
+    }
+  }
+}

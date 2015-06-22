@@ -1,0 +1,53 @@
+<% content_for :title, "Stored Exception: #{@stored_exception.title}" %>
+
+<h4><%= @stored_exception.title %></h4>
+
+<%= simple_format @stored_exception.backtrace %>
+
+<% if @stored_exception.rule %>
+  <hr>
+  <h4>Rule</h4>
+  <p><%= link_to @stored_exception.rule.name, @stored_exception.rule %></p>
+<% end %>
+
+<% if @stored_exception.variables %>
+  <hr>
+  <h4>Variables</h4>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stored_exception.variables.each do |k, v| %>
+        <tr>
+          <td><%= k %></td>
+          <td><%= v %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @stored_exception.environment %>
+  <hr>
+  <h4>Environment</h4>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stored_exception.environment.each do |k, v| %>
+        <tr>
+          <td><%= k %></td>
+          <td><%= v %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

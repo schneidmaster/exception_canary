@@ -4,6 +4,8 @@ module ExceptionCanary
 
     scope :active, -> { where(is_active: true) }
 
+    calculated :exceptions_count, -> { 'select count(*) from exception_canary_stored_exceptions where exception_canary_stored_exceptions.rule_id = exception_canary_rules.id' }
+
     ACTION_NOTIFY   = 10
     ACTION_SUPPRESS = 20
     ACTIONS = [ACTION_NOTIFY, ACTION_SUPPRESS]
