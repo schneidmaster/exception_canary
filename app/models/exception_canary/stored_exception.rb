@@ -5,6 +5,8 @@ module ExceptionCanary
     serialize :environment
     serialize :variables
 
+    scope :search, -> (term) { where('title LIKE ?', "%#{term}%") }
+
     def backtrace_summary
       if backtrace.length < 300
         backtrace

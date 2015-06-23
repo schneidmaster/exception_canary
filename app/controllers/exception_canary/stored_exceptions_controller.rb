@@ -3,7 +3,13 @@ require_dependency 'exception_canary/application_controller'
 module ExceptionCanary
   class StoredExceptionsController < ApplicationController
     def index
-      @stored_exceptions = StoredException.order(:created_at).reverse_order.page(params[:page])
+      base =
+        if params[:term].present?
+          StoredException.search(params[:term])
+        else
+          StoredException
+        end
+      @stored_exceptions = base.order(:created_at).reverse_order.page(params[:page])
     end
 
     def show

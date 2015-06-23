@@ -4,8 +4,10 @@ feature 'Stored exceptions' do
   let(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: 'An Error Occurred' }
 
   describe 'List view' do
+    let!(:exception) { create :stored_exception, title: 'Special Exception' }
+
     before do
-      create_list(:stored_exception, 50, title: rule.value, rule: rule)
+      create_list(:stored_exception, 49, title: rule.value, rule: rule)
       visit '/exception_canary/stored_exceptions'
     end
 
@@ -28,6 +30,24 @@ feature 'Stored exceptions' do
       click_on 'Next'
       expect(page).to have_content('Prev')
       expect(page).not_to have_content('Next')
+    end
+
+    context 'when searching' do
+      before do
+        fill_in 'term', with: 'Special Exception'
+        click_on 'Search'
+      end
+
+      it 'searches for the exception' do
+        expect(page).to have_content('Special Exception')
+        expect(page).not_to have_content('An Error Occurred')
+      end
+
+      it 'clears search' do
+        click_on 'Clear'
+        expect(page).not_to have_content('Special Exception')
+        expect(page).to have_content('An Error Occurred')
+      end
     end
   end
 
