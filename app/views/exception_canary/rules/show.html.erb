@@ -14,10 +14,24 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= action_name(@rule.action) %></td>
+      <td>
+        <%= action_name(@rule.action) %>
+        <% if @rule.notify? %>
+          <%= link_to 'Switch to Suppress', rule_path(@rule, rule: { action: ExceptionCanary::Rule::ACTION_SUPPRESS }), method: :put, class: 'btn' %>
+        <% else %>
+          <%= link_to 'Switch to Notify', rule_path(@rule, rule: { action: ExceptionCanary::Rule::ACTION_NOTIFY }), method: :put, class: 'btn' %>
+        <% end %>
+      </td>
       <td><%= match_type_name(@rule.match_type) %></td>
       <td><%= @rule.value %></td>
-      <td><%= active?(@rule.is_active) %></td>
+      <td>
+        <%= active?(@rule.is_active) %>
+        <% if @rule.is_active %>
+          <%= link_to 'Deactivate', rule_path(@rule, rule: { is_active: false }), method: :put, class: 'btn' %>
+        <% else %>
+          <%= link_to 'Activate', rule_path(@rule, rule: { is_active: true }), method: :put, class: 'btn' %>
+        <% end %>
+      </td>
       <td><%= @rule.exceptions_count %>
     </tr>
   </tbody>
