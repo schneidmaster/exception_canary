@@ -22,6 +22,10 @@ Or install it yourself as:
 
     $ gem install exception_canary
 
+You will also need to install the migrations for the exception_canary tables:
+
+    $ rake exception_canary:install:migrations
+
 ## Usage
 
 exception_canary is build directly on top of [exception_notification](https://github.com/smartinez87/exception_notification). and [exception_notification-rake](https://github.com/nikhaldi/exception_notification-rake), so all of the configuration options you know and love still work. Neato!
