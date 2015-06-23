@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.8'
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'capybara'
+  spec.add_development_dependency 'database_cleaner'
   spec.add_development_dependency 'factory_girl_rails', '~> 3.6.0'
   spec.add_development_dependency 'rspec-rails', '~> 3.0'
   spec.add_development_dependency 'rake', '~> 10.0'

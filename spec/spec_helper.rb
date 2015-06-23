@@ -5,6 +5,7 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'byebug'
+require 'database_cleaner'
 require 'factory_girl_rails'
 require 'rspec/rails'
 
@@ -12,10 +13,22 @@ Rails.backtrace_cleaner.remove_silencers!
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  config.use_transactional_fixtures = true
-  config.infer_base_class_for_anonymous_controllers = false
   config.order = 'random'
 
   # Include FactoryGirl helper methods
   config.include FactoryGirl::Syntax::Methods
+
+  # Clean database between specs.
+  config.before(:suite) do
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
