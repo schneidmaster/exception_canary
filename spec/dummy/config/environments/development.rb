@@ -31,3 +31,10 @@ Dummy::Application.configure do
   config.assets.enabled = true
   config.secret_token = 'k2114xt0GjwDi144950gO2er1619i06V'
 end
+
+Dummy::Application.config.middleware.use ExceptionNotification::Rack,
+                                         email: {
+                                           sender_address: 'test@exception_canary.io',
+                                           exception_recipients: 'zach@aha.io'
+                                         }
+ExceptionNotifier::Rake.configure(email_prefix: '[RAKE ERROR] ')

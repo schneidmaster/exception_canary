@@ -16,12 +16,12 @@ module ExceptionCanary
         end
       end
 
-      StoredException.create! title: exception.message, backtrace: exception.backtrace.join("\n"), environment: ENV.to_hash, variables: variables, klass: exception.class.to_s
+      ExceptionCanary::StoredException.create! title: exception.message, backtrace: exception.backtrace.join("\n"), environment: ENV.to_hash, variables: variables, klass: exception.class.to_s
     end
 
     def suppress_exception?(se)
-      se.rule = Rule.active.find { |r| r.matches?(se) }
-      se.rule ||= Rule.create!(name: se.title, action: Rule::ACTION_NOTIFY, match_type: Rule::MATCH_TYPE_EXACT, value: se.title)
+      se.rule = ExceptionCanary::Rule.active.find { |r| r.matches?(se) }
+      se.rule ||= ExceptionCanary::Rule.create!(name: se.title, action: ExceptionCanary::Rule::ACTION_NOTIFY, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: se.title)
       se.save!
       se.rule.suppress?
     end
