@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(:version => 20150615201509) do
     t.integer  "action"
     t.integer  "match_type"
     t.string   "value"
-    t.boolean  "is_active",  :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "is_active",         :default => false
+    t.boolean  "is_auto_generated", :default => true
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "exception_canary_stored_exceptions", :force => true do |t|

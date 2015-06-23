@@ -29,6 +29,10 @@ module ExceptionCanary
       action == ACTION_SUPPRESS
     end
 
+    def auto_generated?
+      is_auto_generated
+    end
+
     def matches?(exception)
       case match_type
       when MATCH_TYPE_EXACT

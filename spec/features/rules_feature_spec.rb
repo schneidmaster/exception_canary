@@ -60,10 +60,10 @@ feature 'Rules' do
   end
 
   describe 'Creates rule' do
-    let!(:matching_old_rule) { create :rule, name: 'A Rule', value: 'An Error Occurred' }
-    let!(:matching_stored_exception) { create :stored_exception, title: matching_old_rule.value }
+    let!(:matching_old_rule) { create :rule, name: 'An Old Rule', value: 'An Error Occurred', is_auto_generated: true }
+    let!(:matching_stored_exception) { create :stored_exception, title: matching_old_rule.value, rule: matching_old_rule }
     let!(:nonmatching_old_rule) { create :rule, name: 'A Rule', value: 'A Misc Error Occurred' }
-    let!(:nonmatching_stored_exception) { create :stored_exception, title: nonmatching_old_rule.value }
+    let!(:nonmatching_stored_exception) { create :stored_exception, title: nonmatching_old_rule.value, rule: nonmatching_old_rule }
 
     before { visit '/exception_canary/rules/new' }
 
@@ -76,15 +76,23 @@ feature 'Rules' do
     end
 
     context 'valid fields' do
-      it 'creates rule and reclassifies exceptions' do
+      before do
         fill_in 'Name', with: 'The New Rule'
         fill_in 'Value', with: 'An Error Occurred'
         click_on 'Create Rule'
+      end
+
+      it 'creates rule and reclassifies exceptions' do
         expect(page).to have_content('Created rule and reclassified 1 exception.')
         within 'table:last' do
           expect(page).to have_content('An Error Occurred')
           expect(page).not_to have_content('A Misc Error Occurred')
         end
+      end
+
+      it 'destroys old auto generated rule' do
+        click_on 'Rules'
+        expect(page).not_to have_content('An Old Rule')
       end
     end
   end
@@ -107,16 +115,29 @@ feature 'Rules' do
     end
 
     context 'valid fields' do
-      it 'updates rule and reclassifies exceptions' do
+      before do
         fill_in 'Name', with: 'The New Rule'
         fill_in 'Value', with: 'A Misc Error Occurred'
         click_on 'Update Rule'
+      end
+
+      it 'updates rule and reclassifies exceptions' do
         expect(page).to have_content('Updated rule and reclassified 2 exceptions.')
         expect(page).to have_content('The New Rule')
         within 'table:last' do
           expect(page).not_to have_content('An Error Occurred')
           expect(page).to have_content('A Misc Error Occurred')
         end
+      end
+
+      it 'changes rule to no longer be auto generated' do
+        click_on 'Rules'
+        click_on 'New Rule'
+        fill_in 'Name', with: 'The New Overriding Rule'
+        fill_in 'Value', with: 'A Misc Error Occurred'
+        click_on 'Create Rule'
+        click_on 'Rules'
+        expect(page).to have_content('The New Rule')
       end
     end
   end
