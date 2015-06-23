@@ -5,7 +5,7 @@ module ExceptionCanary
     helper_method :sort_column, :sort_direction
 
     def index
-      @rules = Rule.scoped.calculated(:exceptions_count).order(sort_param).page(params[:page])
+      @rules = Rule.scoped.calculated(:exceptions_count, :most_recent_exception).order(sort_param).page(params[:page])
     end
 
     def show
@@ -54,11 +54,12 @@ module ExceptionCanary
     end
 
     def sort_column
-      Rule.column_names.concat(['exceptions_count']).include?(params[:sort]) ? params[:sort] : 'name'
+      Rule.column_names.concat(['exceptions_count', 'most_recent_exception']).include?(params[:sort]) ? params[:sort] : 'most_recent_exception'
     end
 
     def sort_direction
-      %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
+      default = sort_column == 'most_recent_exception' ? 'desc' : 'asc'
+      %w(asc desc).include?(params[:direction]) ? params[:direction] : default
     end
 
     def reclassify_exceptions

@@ -10,6 +10,7 @@ module ExceptionCanary
     attr_accessible :name, :action, :match_type, :value, :is_auto_generated
 
     calculated :exceptions_count, -> { 'select count(*) from exception_canary_stored_exceptions where exception_canary_stored_exceptions.rule_id = exception_canary_rules.id' }
+    calculated :most_recent_exception, -> { 'select max(exception_canary_stored_exceptions.created_at) from exception_canary_stored_exceptions where exception_canary_stored_exceptions.rule_id = exception_canary_rules.id'}
 
     ACTION_NOTIFY   = 10
     ACTION_SUPPRESS = 20
