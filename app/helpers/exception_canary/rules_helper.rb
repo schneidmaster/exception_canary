@@ -1,5 +1,16 @@
 module ExceptionCanary
   module RulesHelper
+    def sortable(column, title = nil)
+      title ||= column.titleize
+      icon =
+        if column == sort_column
+          (sort_direction == 'asc' ? '<i class="icon-chevron-up"></i>' : '<i class="icon-chevron-down"></i>')
+        end
+      css_class = column == sort_column ? 'current' : nil
+      direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
+      link_to "#{title} #{icon}".html_safe, { sort: column, direction: direction }, class: css_class
+    end
+
     def action_name(action)
       case action
       when Rule::ACTION_NOTIFY

@@ -2,14 +2,15 @@
 
 <p><%= link_to 'New Rule', new_rule_path %></p>
 
-<table class='table'>
+<table class='table rules'>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Action</th>
-      <th>Match Type</th>
-      <th>Value</th>
-      <th>Active?</th>
+      <th><%= sortable 'name' %></th>
+      <th><%= sortable 'action' %></th>
+      <th><%= sortable 'match_type', 'Match Type' %></th>
+      <th><%= sortable 'value' %></th>
+      <th><%= sortable 'is_active', 'Active?' %></th>
+      <th><%= sortable 'exceptions_count', 'Matched Exceptions' %></th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
         <td><%= match_type_name(rule.match_type) %></td>
         <td><%= rule.value %></td>
         <td><%= active?(rule.is_active) %></td>
+        <td><%= rule.exceptions_count %></td>
       </tr>
     <% end %>
   </tbody>

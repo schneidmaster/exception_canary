@@ -2,8 +2,10 @@ require_dependency 'exception_canary/application_controller'
 
 module ExceptionCanary
   class RulesController < ApplicationController
+    helper_method :sort_column, :sort_direction
+
     def index
-      @rules = Rule.scoped.page(params[:page])
+      @rules = Rule.scoped.calculated(:exceptions_count).order(sort_param).page(params[:page])
     end
 
     def show
@@ -46,6 +48,18 @@ module ExceptionCanary
     end
 
     private
+
+    def sort_param
+      "#{sort_column} #{sort_direction}"
+    end
+
+    def sort_column
+      Rule.column_names.concat(['exceptions_count']).include?(params[:sort]) ? params[:sort] : 'name'
+    end
+
+    def sort_direction
+      %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
+    end
 
     def reclassify_exceptions
       exceptions_reclassified = 0
