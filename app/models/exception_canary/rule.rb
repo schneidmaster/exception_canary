@@ -7,7 +7,7 @@ module ExceptionCanary
     validates :match_type, presence: true
     validates :value, presence: true
 
-    attr_accessible :name, :action, :match_type, :value
+    attr_accessible :name, :action, :match_type, :value, :is_active, :is_auto_generated
 
     scope :active, -> { where(is_active: true) }
 

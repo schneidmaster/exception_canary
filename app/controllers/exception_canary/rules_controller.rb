@@ -18,8 +18,7 @@ module ExceptionCanary
     end
 
     def create
-      @rule = Rule.new(params[:rule])
-      @rule.is_auto_generated = false
+      @rule = Rule.new(params[:rule].merge(is_auto_generated: false))
       if @rule.save
         reclassified_msg = flash_num_reclassified(reclassify_exceptions)
         redirect_to @rule, flash: { notice: "Created rule and reclassified #{reclassified_msg}." }
@@ -34,9 +33,7 @@ module ExceptionCanary
 
     def update
       @rule = Rule.find(params[:id])
-      @rule.assign_attributes(params[:rule])
-      @rule.is_auto_generated = false
-      if @rule.save
+      if @rule.update_attributes(params[:rule].merge(is_auto_generated: false))
         reclassified_msg = flash_num_reclassified(reclassify_exceptions)
         redirect_to @rule, flash: { notice: "Updated rule and reclassified #{reclassified_msg}." }
       else
