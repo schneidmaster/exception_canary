@@ -2,8 +2,6 @@
 
 <h4><%= @stored_exception.title %></h4>
 
-<%= simple_format @stored_exception.backtrace %>
-
 <% if @stored_exception.rule %>
   <hr>
   <h4>Rule</h4>
@@ -17,6 +15,13 @@
     <% end %>
   </p>
 <% end %>
+
+<hr>
+<h4>Backtrace</h4>
+<div class='backtrace'>
+  <%= simple_format @stored_exception.backtrace %>
+</div>
+<%= link_to 'Show More', '#', id: 'show-more' %>
 
 <% if @stored_exception.variables %>
   <hr>
