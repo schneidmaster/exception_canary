@@ -144,13 +144,6 @@ feature 'Rules' do
     context 'with buttons on rule page' do
       before { visit "/exception_canary/rules/#{rule.id}" }
 
-      it 'updates active status' do
-        click_on 'Deactivate'
-        expect(page).to have_content('Updated rule and reclassified 0 exceptions.')
-        expect(page).to have_content('Activate')
-        expect(page).not_to have_content('Deactivate')
-      end
-
       it 'updates action' do
         click_on 'Switch to Notify'
         expect(page).to have_content('Updated rule and reclassified 0 exceptions.')
@@ -161,13 +154,6 @@ feature 'Rules' do
 
     context 'with buttons on exception page' do
       before { visit "/exception_canary/stored_exceptions/#{stored_exception.id}" }
-
-      it 'updates active status' do
-        click_on 'Deactivate'
-        expect(page).to have_content('Updated rule and reclassified 0 exceptions.')
-        expect(page).to have_content('Activate')
-        expect(page).not_to have_content('Deactivate')
-      end
 
       it 'updates action' do
         click_on 'Switch to Notify'

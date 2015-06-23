@@ -9,14 +9,6 @@
   <h4>Rule</h4>
   <p><%= link_to @stored_exception.rule.name, @stored_exception.rule %></p>
   <p>
-    Rule status: 
-    <% if @stored_exception.rule.is_active %>
-      <b>Active</b> <%= link_to 'Deactivate', rule_path(@stored_exception.rule, rule: { is_active: false }), method: :put, class: 'btn' %>
-    <% else %>
-      <b>Inactive</b> <%= link_to 'Activate', rule_path(@stored_exception.rule, rule: { is_active: true }), method: :put, class: 'btn' %>
-    <% end %>
-  </p>
-  <p>
     Rule action: 
     <% if @stored_exception.rule.notify? %>
       <b>Notify</b> <%= link_to 'Switch to Suppress', rule_path(@stored_exception.rule, rule: { action: ExceptionCanary::Rule::ACTION_SUPPRESS }), method: :put, class: 'btn' %>

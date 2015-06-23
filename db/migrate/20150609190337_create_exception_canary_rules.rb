@@ -5,7 +5,6 @@ class CreateExceptionCanaryRules < ActiveRecord::Migration
       t.integer :action
       t.integer :match_type
       t.string :value
-      t.boolean :is_active, default: false
       t.boolean :is_auto_generated, default: true
       t.timestamps null: false
     end

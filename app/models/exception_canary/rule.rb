@@ -7,9 +7,7 @@ module ExceptionCanary
     validates :match_type, presence: true
     validates :value, presence: true
 
-    attr_accessible :name, :action, :match_type, :value, :is_active, :is_auto_generated
-
-    scope :active, -> { where(is_active: true) }
+    attr_accessible :name, :action, :match_type, :value, :is_auto_generated
 
     calculated :exceptions_count, -> { 'select count(*) from exception_canary_stored_exceptions where exception_canary_stored_exceptions.rule_id = exception_canary_rules.id' }
 

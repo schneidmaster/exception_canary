@@ -28,9 +28,5 @@ module ExceptionCanary
         'Regex'
       end
     end
-
-    def active?(is_active)
-      is_active ? 'Yes' : 'No'
-    end
   end
 end
