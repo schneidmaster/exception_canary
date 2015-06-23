@@ -8,6 +8,7 @@ require 'byebug'
 require 'database_cleaner'
 require 'factory_girl_rails'
 require 'rspec/rails'
+require 'capybara/email/rspec'
 
 Rails.backtrace_cleaner.remove_silencers!
 

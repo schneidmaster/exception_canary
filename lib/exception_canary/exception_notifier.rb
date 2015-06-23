@@ -8,7 +8,7 @@ module ExceptionNotifier
       return false if ignored?(exception, options)
       selected_notifiers = options.delete(:notifiers) || notifiers
       [*selected_notifiers].each do |notifier|
-        fire_notification(notifier, exception, options.dup)
+        fire_notification(notifier, exception, options.dup.merge(data: { se: e }))
       end
       true
     end
@@ -25,6 +25,7 @@ module ExceptionNotifier
 
         @env        = env
         @exception  = exception
+        @se         = e
         @options    = options.reverse_merge(env['exception_notifier.options'] || {}).reverse_merge(default_options)
         @kontroller = env['action_controller.instance'] || MissingController.new
         @request    = ActionDispatch::Request.new(env)
