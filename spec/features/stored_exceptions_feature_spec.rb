@@ -7,7 +7,7 @@ feature 'Stored exceptions' do
     let!(:exception) { create :stored_exception, title: 'Special Exception' }
 
     before do
-      create_list(:stored_exception, 49, title: rule.value, rule: rule)
+      create_list(:stored_exception, 99, title: rule.value, rule: rule)
       visit '/exception_canary/stored_exceptions'
     end
 

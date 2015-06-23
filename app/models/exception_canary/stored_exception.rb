@@ -2,6 +2,8 @@ module ExceptionCanary
   class StoredException < ActiveRecord::Base
     belongs_to :rule
 
+    paginates_per 50
+
     serialize :environment
     serialize :variables
 

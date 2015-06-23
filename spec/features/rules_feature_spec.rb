@@ -28,7 +28,7 @@ feature 'Rules' do
     let(:rule) { create :rule, name: 'A Rule', value: 'An Error Occurred' }
 
     before do
-      create_list(:stored_exception, 50, title: rule.value, rule: rule)
+      create_list(:stored_exception, 100, title: rule.value, rule: rule)
       visit "/exception_canary/rules/#{rule.id}"
     end
 
