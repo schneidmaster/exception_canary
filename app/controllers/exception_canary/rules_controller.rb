@@ -54,7 +54,7 @@ module ExceptionCanary
     end
 
     def sort_column
-      Rule.column_names.concat(['exceptions_count', 'most_recent_exception']).include?(params[:sort]) ? params[:sort] : 'most_recent_exception'
+      Rule.column_names.concat(%w(exceptions_count most_recent_exception)).include?(params[:sort]) ? params[:sort] : 'most_recent_exception'
     end
 
     def sort_direction

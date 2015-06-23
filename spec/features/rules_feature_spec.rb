@@ -41,7 +41,7 @@ feature 'Rules' do
     end
 
     it 'links to exception' do
-      first(:link, rule.stored_exceptions.last.created_at).click
+      first(:link, rule.stored_exceptions.last.created_at.strftime('%Y-%m-%d %H:%M:%S')).click
       expect(page).to have_content("Stored Exception: #{rule.stored_exceptions.last.title}")
     end
 
@@ -175,7 +175,7 @@ feature 'Rules' do
       expect(page).to have_content('Deleted rule.')
       expect(page).not_to have_content('An Outdated Rule')
       click_on 'Exceptions'
-      click_on stored_exception.created_at
+      click_on stored_exception.created_at.strftime('%Y-%m-%d %H:%M:%S')
       expect(page).not_to have_content('An Outdated Rule')
     end
   end

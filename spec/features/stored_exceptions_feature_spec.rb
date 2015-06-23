@@ -16,7 +16,7 @@ feature 'Stored exceptions' do
     end
 
     it 'links to exception' do
-      first(:link, rule.stored_exceptions.last.created_at).click
+      first(:link, rule.stored_exceptions.last.created_at.strftime('%Y-%m-%d %H:%M:%S')).click
       expect(page).to have_content("Stored Exception: #{rule.stored_exceptions.last.title}")
     end
 

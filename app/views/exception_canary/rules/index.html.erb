@@ -21,7 +21,7 @@
         <td><%= match_type_name(rule.match_type) %></td>
         <td><%= rule.value %></td>
         <td><%= rule.exceptions_count %></td>
-        <td><%= format_time(Time.parse(rule.most_recent_exception)) %></td>
+        <td><%= rule.most_recent_exception.nil? ? 'None' : format_time(Time.parse(rule.most_recent_exception)) %></td>
       </tr>
     <% end %>
   </tbody>

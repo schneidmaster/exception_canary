@@ -12,7 +12,7 @@
   <tbody>
     <% @stored_exceptions.each do |se| %>
       <tr>
-        <td><%= link_to se.created_at, se %></td>
+        <td><%= link_to format_time(se.created_at), se %></td>
         <td><%= se.title %></td>
         <td><%= se.klass %></td>
         <% unless defined?(hide_rule) && hide_rule %>
