@@ -4,7 +4,6 @@
       <th>Timestamp</th>
       <th>Title</th>
       <th>Class</th>
-      <th>Backtrace</th>
       <% unless defined?(hide_rule) && hide_rule %>
         <th>Rule</th>
       <% end %>
@@ -16,11 +15,14 @@
         <td><%= link_to se.created_at, se %></td>
         <td><%= se.title %></td>
         <td><%= se.klass %></td>
-        <td><%= se.backtrace_summary %></td>
         <% unless defined?(hide_rule) && hide_rule %>
           <td>
             <% if se.rule %>
-              <%= link_to se.rule.name, se.rule %>
+              <% if se.rule.name == se.title %>
+                <%= link_to se.rule.id, se.rule %>
+              <% else %>
+                <%= link_to se.rule.name, se.rule %>
+              <% end %>
             <% else %>
               None
             <% end %>
