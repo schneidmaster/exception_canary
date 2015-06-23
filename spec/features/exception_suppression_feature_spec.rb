@@ -10,7 +10,7 @@ feature 'Exception suppression' do
   end
 
   context 'with rule exactly matching exception title' do
-    let!(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: 'Oh noes!' }
+    let!(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: '(StandardError) "Oh noes!"' }
 
     it 'suppresses a matching exception' do
       mail_count = ActionMailer::Base.deliveries.count
@@ -34,7 +34,7 @@ feature 'Exception suppression' do
   end
 
   context 'with rule regex matching exception title' do
-    let!(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_REGEX, value: 'Oh no[o]+es!' }
+    let!(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_REGEX, value: '\(StandardError\) "Oh no[o]+es!"' }
 
     it 'suppresses a matching exception' do
       mail_count = ActionMailer::Base.deliveries.count

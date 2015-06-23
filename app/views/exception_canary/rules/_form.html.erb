@@ -22,6 +22,8 @@
 
     <%= f.label :value %>
     <%= f.text_field :value %>
+
+    <p>Note: When defining a regex value, you must escape parentheses and other regex operators, e.g. \(StandardError\) not (StandardError)</p>
    
     <br>
     <%= f.submit %>

@@ -17,6 +17,6 @@ feature 'Exception notification' do
   it 'provides link' do
     expect(current_email).to have_content('http://127.0.0.1:3000/exception_canary/stored_exceptions/1')
     visit 'http://127.0.0.1:3000/exception_canary/stored_exceptions/1'
-    expect(page).to have_content('Stored Exception: Oh noes!')
+    expect(page).to have_content('Stored Exception: (StandardError) "Oh noes!"')
   end
 end
