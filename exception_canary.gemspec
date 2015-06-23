@@ -17,7 +17,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'calculated_attributes'
-  spec.add_dependency 'coffee-rails'
   spec.add_dependency 'exception_notification', '>= 3.0.1'
   spec.add_dependency 'exception_notification-rake', '>= 0.0.5'
   spec.add_dependency 'jquery-rails'
