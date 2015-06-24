@@ -1,6 +1,6 @@
 module ExceptionCanary
   class StoredException < ActiveRecord::Base
-    belongs_to :rule
+    belongs_to :group
 
     paginates_per 50
 

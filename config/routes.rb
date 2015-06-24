@@ -1,7 +1,7 @@
 ExceptionCanary::Dashboard.routes.draw do
   root to: 'stored_exceptions#index'
 
-  resources :rules, except: [:new, :create] do
+  resources :groups, except: [:new, :create] do
     get 'page/:page', action: :index, on: :collection
     get ':id/page/:page', action: :show, on: :collection
   end

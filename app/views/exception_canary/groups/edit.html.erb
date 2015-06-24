@@ -1,12 +1,12 @@
 <h4>Edit group</h4>
  
-<%= form_for @rule do |f| %>
-  <% if @rule.errors.any? %>
+<%= form_for @group do |f| %>
+  <% if @group.errors.any? %>
     <div id='error_explanation'>
-      <h2><%= pluralize(@rule.errors.count, 'error') %> prohibited
-        this rule from being saved:</h2>
+      <h2><%= pluralize(@group.errors.count, 'error') %> prohibited
+        this group from being saved:</h2>
       <ul>
-      <% @rule.errors.full_messages.each do |msg| %>
+      <% @group.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -17,10 +17,10 @@
     <%= f.text_field :name %>
    
     <%= f.label :action %>
-    <%= f.select :action, ExceptionCanary::Rule::ACTIONS.map { |a| [action_name(a), a] } %>
+    <%= f.select :action, ExceptionCanary::Group::ACTIONS.map { |a| [action_name(a), a] } %>
 
     <%= f.label :match_type %>
-    <%= f.select :match_type, ExceptionCanary::Rule::MATCH_TYPES.map { |m| [match_type_name(m), m] } %>
+    <%= f.select :match_type, ExceptionCanary::Group::MATCH_TYPES.map { |m| [match_type_name(m), m] } %>
 
     <%= f.label :value %>
     <%= f.text_area :value %>

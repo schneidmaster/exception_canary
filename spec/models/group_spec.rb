@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe ExceptionCanary::Rule do
-  subject { rule }
+describe ExceptionCanary::Group do
+  subject { group }
 
   describe '#notify?' do
     context 'when action is notify' do
-      let(:rule) { create :rule, action: ExceptionCanary::Rule::ACTION_NOTIFY }
+      let(:group) { create :group, action: ExceptionCanary::Group::ACTION_NOTIFY }
       it 'returns true' do
         expect(subject.notify?).to eq(true)
       end
     end
 
     context 'when action is suppress' do
-      let(:rule) { create :rule, action: ExceptionCanary::Rule::ACTION_SUPPRESS }
+      let(:group) { create :group, action: ExceptionCanary::Group::ACTION_SUPPRESS }
       it 'returns false' do
         expect(subject.notify?).to eq(false)
       end
@@ -21,14 +21,14 @@ describe ExceptionCanary::Rule do
 
   describe '#suppress?' do
     context 'when action is notify' do
-      let(:rule) { create :rule, action: ExceptionCanary::Rule::ACTION_NOTIFY }
+      let(:group) { create :group, action: ExceptionCanary::Group::ACTION_NOTIFY }
       it 'returns false' do
         expect(subject.suppress?).to eq(false)
       end
     end
 
     context 'when action is suppress' do
-      let(:rule) { create :rule, action: ExceptionCanary::Rule::ACTION_SUPPRESS }
+      let(:group) { create :group, action: ExceptionCanary::Group::ACTION_SUPPRESS }
       it 'returns true' do
         expect(subject.suppress?).to eq(true)
       end
@@ -41,7 +41,7 @@ describe ExceptionCanary::Rule do
     let(:non_matching_exception) { create :stored_exception, title: 'Inexact Title' }
 
     context 'when match type is exact' do
-      let(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: 'Exact Title' }
+      let(:group) { create :group, match_type: ExceptionCanary::Group::MATCH_TYPE_EXACT, value: 'Exact Title' }
 
       it 'affirms matching exception' do
         expect(subject.matches?(matching_exception)).to eq(true)
@@ -54,7 +54,7 @@ describe ExceptionCanary::Rule do
     end
 
     context 'when match type is regex' do
-      let(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_REGEX, value: 'Exact [a-z]* Title' }
+      let(:group) { create :group, match_type: ExceptionCanary::Group::MATCH_TYPE_REGEX, value: 'Exact [a-z]* Title' }
 
       it 'affirms matching exception' do
         expect(subject.matches?(matching_regex_exception)).to eq(true)

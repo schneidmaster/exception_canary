@@ -1,6 +1,6 @@
-class CreateExceptionCanaryRules < ActiveRecord::Migration
+class CreateExceptionCanaryGroups < ActiveRecord::Migration
   def change
-    create_table :exception_canary_rules do |t|
+    create_table :exception_canary_groups do |t|
       t.text :name
       t.integer :action
       t.integer :match_type

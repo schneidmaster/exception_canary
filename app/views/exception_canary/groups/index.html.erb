@@ -1,0 +1,28 @@
+<% content_for :title, 'Groups' %>
+
+<table class='table groups'>
+  <thead>
+    <tr>
+      <th><%= sortable 'name' %></th>
+      <th><%= sortable 'action' %></th>
+      <th><%= sortable 'match_type', 'Match Type' %></th>
+      <th><%= sortable 'value' %></th>
+      <th><%= sortable 'exceptions_count', 'Matched Exceptions' %></th>
+      <th><%= sortable 'most_recent_exception', 'Most Recent Exception' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @groups.each do |group| %>
+      <tr <%= 'class="warning"' if group.notify? %>>
+        <td><%= link_to group.name, group %></td>
+        <td><%= action_name(group.action) %></td>
+        <td><%= match_type_name(group.match_type) %></td>
+        <td><%= group.value %></td>
+        <td><%= group.exceptions_count %></td>
+        <td><%= group.most_recent_exception.nil? ? 'None' : format_time(Time.parse(group.most_recent_exception)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @groups %>

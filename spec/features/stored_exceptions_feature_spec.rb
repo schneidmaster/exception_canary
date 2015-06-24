@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 feature 'Stored exceptions' do
-  let(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: 'An Error Occurred' }
+  let(:group) { create :group, match_type: ExceptionCanary::Group::MATCH_TYPE_EXACT, value: 'An Error Occurred' }
 
   describe 'List view' do
     let!(:exception) { create :stored_exception, title: 'Special Exception' }
 
     before do
-      create_list(:stored_exception, 99, title: rule.value, rule: rule)
+      create_list(:stored_exception, 99, title: group.value, group: group)
       visit '/exception_canary/stored_exceptions'
     end
 
@@ -16,13 +16,13 @@ feature 'Stored exceptions' do
     end
 
     it 'links to exception' do
-      first(:link, rule.stored_exceptions.last.created_at.strftime('%Y-%m-%d %H:%M:%S')).click
-      expect(page).to have_content("Stored Exception: #{rule.stored_exceptions.last.title}")
+      first(:link, group.stored_exceptions.last.created_at.strftime('%Y-%m-%d %H:%M:%S')).click
+      expect(page).to have_content(group.stored_exceptions.last.title)
     end
 
-    it 'links to rule' do
-      first(:link, rule.name).click
-      expect(page).to have_content("Rule: #{rule.name}")
+    it 'links to group' do
+      first(:link, group.name).click
+      expect(page).to have_content(group.name)
     end
 
     it 'paginates' do
@@ -52,11 +52,11 @@ feature 'Stored exceptions' do
   end
 
   describe 'Show view' do
-    let(:stored_exception) { create :stored_exception, title: rule.value, rule: rule }
+    let(:stored_exception) { create :stored_exception, title: group.value, group: group }
     before { visit "/exception_canary/stored_exceptions/#{stored_exception.id}" }
 
     it 'shows exception' do
-      expect(page).to have_content("Stored Exception: #{stored_exception.title}")
+      expect(page).to have_content(stored_exception.title)
     end
   end
 end

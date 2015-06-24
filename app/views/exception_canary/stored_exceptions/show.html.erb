@@ -3,16 +3,16 @@
 <h4><%= @stored_exception.title %></h4>
 <h5>Class: <%= @stored_exception.klass %></h5>
 
-<% if @stored_exception.rule %>
+<% if @stored_exception.group %>
   <hr>
-  <h4>Rule</h4>
-  <p><%= link_to @stored_exception.rule.name, @stored_exception.rule %></p>
+  <h4>Group</h4>
+  <p><%= link_to @stored_exception.group.name, @stored_exception.group %></p>
   <p>
-    Rule action: 
-    <% if @stored_exception.rule.notify? %>
-      <b>Notify</b> <%= link_to 'Switch to Suppress', rule_path(@stored_exception.rule, rule: { action: ExceptionCanary::Rule::ACTION_SUPPRESS }), method: :put, class: 'btn' %>
+    Group action: 
+    <% if @stored_exception.group.notify? %>
+      <b>Notify</b> <%= link_to 'Switch to Suppress', group_path(@stored_exception.group, group: { action: ExceptionCanary::Group::ACTION_SUPPRESS }), method: :put, class: 'btn' %>
     <% else %>
-      <b>Suppress</b> <%= link_to 'Switch to Notify', rule_path(@stored_exception.rule, rule: { action: ExceptionCanary::Rule::ACTION_NOTIFY }), method: :put, class: 'btn' %>
+      <b>Suppress</b> <%= link_to 'Switch to Notify', group_path(@stored_exception.group, group: { action: ExceptionCanary::Group::ACTION_NOTIFY }), method: :put, class: 'btn' %>
     <% end %>
   </p>
 <% end %>

@@ -4,8 +4,8 @@
       <th>Timestamp</th>
       <th>Title</th>
       <th>Class</th>
-      <% unless defined?(hide_rule) && hide_rule %>
-        <th>Rule</th>
+      <% unless defined?(hide_group) && hide_group %>
+        <th>Group</th>
       <% end %>
     </tr>
   </thead>
@@ -15,13 +15,13 @@
         <td><%= link_to format_time(se.created_at), se %></td>
         <td><%= se.title %></td>
         <td><%= se.klass %></td>
-        <% unless defined?(hide_rule) && hide_rule %>
+        <% unless defined?(hide_group) && hide_group %>
           <td>
-            <% if se.rule %>
-              <% if se.rule.name == se.title %>
-                <%= link_to se.rule.id, se.rule %>
+            <% if se.group %>
+              <% if se.group.name == se.title %>
+                <%= link_to se.group.id, se.group %>
               <% else %>
-                <%= link_to se.rule.name, se.rule %>
+                <%= link_to se.group.name, se.group %>
               <% end %>
             <% else %>
               None

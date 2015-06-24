@@ -9,8 +9,8 @@ feature 'Exception suppression' do
     end
   end
 
-  context 'with rule exactly matching exception title' do
-    let!(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: '(StandardError) "Oh noes!"' }
+  context 'with group exactly matching exception title' do
+    let!(:group) { create :group, match_type: ExceptionCanary::Group::MATCH_TYPE_EXACT, value: '(StandardError) "Oh noes!"' }
 
     it 'suppresses a matching exception' do
       mail_count = ActionMailer::Base.deliveries.count
@@ -18,7 +18,7 @@ feature 'Exception suppression' do
         visit '/some_action'
       rescue
         expect(ActionMailer::Base.deliveries.count).to eq(mail_count)
-        expect(ExceptionCanary::StoredException.first.rule).to eq(rule)
+        expect(ExceptionCanary::StoredException.first.group).to eq(group)
       end
     end
 
@@ -28,13 +28,13 @@ feature 'Exception suppression' do
         visit '/some_other_action'
       rescue
         expect(ActionMailer::Base.deliveries.count).not_to eq(mail_count)
-        expect(ExceptionCanary::StoredException.first.rule).not_to eq(rule)
+        expect(ExceptionCanary::StoredException.first.group).not_to eq(group)
       end
     end
   end
 
-  context 'with rule regex matching exception title' do
-    let!(:rule) { create :rule, match_type: ExceptionCanary::Rule::MATCH_TYPE_REGEX, value: '\(StandardError\) "Oh no[o]+es!"' }
+  context 'with group regex matching exception title' do
+    let!(:group) { create :group, match_type: ExceptionCanary::Group::MATCH_TYPE_REGEX, value: '\(StandardError\) "Oh no[o]+es!"' }
 
     it 'suppresses a matching exception' do
       mail_count = ActionMailer::Base.deliveries.count
@@ -42,7 +42,7 @@ feature 'Exception suppression' do
         visit '/some_other_action'
       rescue
         expect(ActionMailer::Base.deliveries.count).to eq(mail_count)
-        expect(ExceptionCanary::StoredException.first.rule).to eq(rule)
+        expect(ExceptionCanary::StoredException.first.group).to eq(group)
       end
     end
 
@@ -52,17 +52,17 @@ feature 'Exception suppression' do
         visit '/some_action'
       rescue
         expect(ActionMailer::Base.deliveries.count).not_to eq(mail_count)
-        expect(ExceptionCanary::StoredException.first.rule).not_to eq(rule)
+        expect(ExceptionCanary::StoredException.first.group).not_to eq(group)
       end
     end
   end
 
-  context 'with no rule matching exception title' do
-    it 'creates a rule' do
+  context 'with no group matching exception title' do
+    it 'creates a group' do
       begin
         visit '/some_action'
       rescue
-        expect(ExceptionCanary::StoredException.first.rule).not_to eq(nil)
+        expect(ExceptionCanary::StoredException.first.group).not_to eq(nil)
       end
     end
   end

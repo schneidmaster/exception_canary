@@ -39,10 +39,10 @@ module ExceptionCanary
     end
 
     def suppress_exception?(se)
-      se.rule = ExceptionCanary::Rule.find { |r| r.matches?(se) }
-      se.rule ||= ExceptionCanary::Rule.create!(name: se.title, action: ExceptionCanary::Rule::ACTION_NOTIFY, match_type: ExceptionCanary::Rule::MATCH_TYPE_EXACT, value: se.title)
+      se.group = ExceptionCanary::Group.find { |r| r.matches?(se) }
+      se.group ||= ExceptionCanary::Group.create!(name: se.title, action: ExceptionCanary::Group::ACTION_NOTIFY, match_type: ExceptionCanary::Group::MATCH_TYPE_EXACT, value: se.title)
       se.save!
-      se.rule.suppress?
+      se.group.suppress?
     end
   end
 end

@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20150615201509) do
 
-  create_table "exception_canary_rules", :force => true do |t|
+  create_table "exception_canary_groups", :force => true do |t|
     t.text     "name"
     t.integer  "action"
     t.integer  "match_type"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20150615201509) do
   end
 
   create_table "exception_canary_stored_exceptions", :force => true do |t|
-    t.integer  "rule_id",     :limit => 8
+    t.integer  "group_id",    :limit => 8
     t.text     "title"
     t.text     "backtrace"
     t.text     "environment"
@@ -34,6 +34,6 @@ ActiveRecord::Schema.define(:version => 20150615201509) do
     t.datetime "updated_at",               :null => false
   end
 
-  add_index "exception_canary_stored_exceptions", ["rule_id"], :name => "index_exception_canary_stored_exceptions_on_rule_id"
+  add_index "exception_canary_stored_exceptions", ["group_id"], :name => "index_exception_canary_stored_exceptions_on_group_id"
 
 end
