@@ -24,14 +24,16 @@ ActiveRecord::Schema.define(:version => 20150615201509) do
   end
 
   create_table "exception_canary_stored_exceptions", :force => true do |t|
-    t.integer  "rule_id"
+    t.integer  "rule_id",     :limit => 8
     t.text     "title"
     t.text     "backtrace"
     t.text     "environment"
     t.text     "variables"
     t.string   "klass"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
+
+  add_index "exception_canary_stored_exceptions", ["rule_id"], :name => "index_exception_canary_stored_exceptions_on_rule_id"
 
 end

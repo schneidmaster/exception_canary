@@ -1,7 +1,7 @@
 class CreateExceptionCanaryStoredExceptions < ActiveRecord::Migration
   def change
     create_table :exception_canary_stored_exceptions do |t|
-      t.belongs_to :rule
+      t.integer :rule_id, limit: 8
       t.text :title
       t.text :backtrace
       t.text :environment
@@ -9,5 +9,6 @@ class CreateExceptionCanaryStoredExceptions < ActiveRecord::Migration
       t.string :klass
       t.timestamps null: false
     end
+    add_index 'exception_canary_stored_exceptions', [:rule_id]
   end
 end
