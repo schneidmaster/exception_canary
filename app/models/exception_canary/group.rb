@@ -6,8 +6,9 @@ module ExceptionCanary
     validates :action, presence: true
     validates :match_type, presence: true
     validates :value, presence: true
+    validate :note_if_suppressing
 
-    attr_accessible :name, :action, :match_type, :value, :is_auto_generated
+    attr_accessible :name, :action, :match_type, :value, :note, :is_auto_generated
 
     calculated :exceptions_count, -> { 'select count(*) from exception_canary_stored_exceptions where exception_canary_stored_exceptions.group_id = exception_canary_groups.id' }
     calculated :most_recent_exception, -> { 'select max(created_at) from exception_canary_stored_exceptions where exception_canary_stored_exceptions.group_id = exception_canary_groups.id' }
@@ -52,6 +53,12 @@ module ExceptionCanary
       when MATCH_TYPE_REGEX
         !Regexp.new(value).match(exception.title).nil?
       end
+    end
+
+    private
+
+    def note_if_suppressing
+      errors.add(:note, 'must be populated when suppressing notifications.') if suppress? && note.blank?
     end
   end
 end

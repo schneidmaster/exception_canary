@@ -10,7 +10,7 @@ feature 'Exception suppression' do
   end
 
   context 'with group exactly matching exception title' do
-    let!(:group) { create :group, match_type: ExceptionCanary::Group::MATCH_TYPE_EXACT, value: '(StandardError) "Oh noes!"' }
+    let!(:group) { create :group, action: ExceptionCanary::Group::ACTION_SUPPRESS, match_type: ExceptionCanary::Group::MATCH_TYPE_EXACT, value: '(StandardError) "Oh noes!"' }
 
     it 'suppresses a matching exception' do
       mail_count = ActionMailer::Base.deliveries.count
@@ -34,7 +34,7 @@ feature 'Exception suppression' do
   end
 
   context 'with group regex matching exception title' do
-    let!(:group) { create :group, match_type: ExceptionCanary::Group::MATCH_TYPE_REGEX, value: '\(StandardError\) "Oh no[o]+es!"' }
+    let!(:group) { create :group, action: ExceptionCanary::Group::ACTION_SUPPRESS, match_type: ExceptionCanary::Group::MATCH_TYPE_REGEX, value: '\(StandardError\) "Oh no[o]+es!"' }
 
     it 'suppresses a matching exception' do
       mail_count = ActionMailer::Base.deliveries.count

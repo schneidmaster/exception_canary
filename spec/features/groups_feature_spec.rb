@@ -60,7 +60,7 @@ feature 'Groups' do
   end
 
   describe 'Updates group' do
-    let!(:group) { create :group, name: 'A Group', value: 'An Error Occurred' }
+    let!(:group) { create :group, name: 'A Group', value: 'An Error Occurred', note: nil }
     let!(:stored_exception) { create :stored_exception, title: group.value, group: group }
     let!(:nonmatching_stored_exception) { create :stored_exception, title: 'A Misc Error Occurred' }
 
@@ -96,22 +96,54 @@ feature 'Groups' do
     context 'with buttons on group page' do
       before { visit "/exception_canary/groups/#{group.id}" }
 
-      it 'updates action' do
-        click_on 'Switch to Notify'
-        expect(page).to have_content('Updated group and reclassified 0 exceptions.')
-        expect(page).to have_content('Switch to Suppress')
-        expect(page).not_to have_content('Switch to Notify')
+      context 'no note' do
+        it 'requires a note and updates action' do
+          click_on 'Switch to Suppress'
+          expect(page).to have_content('Note must be populated when suppressing notifications')
+          fill_in 'Note', with: 'This is a reason'
+          click_on 'Update Group'
+          expect(page).to have_content('Updated group and reclassified 0 exceptions.')
+          expect(page).to have_content('Switch to Notify')
+          expect(page).not_to have_content('Switch to Suppress')
+        end
+      end
+
+      context 'with a note' do
+        before { group.update_attributes(note: 'This is a note') }
+
+        it 'updates action' do
+          click_on 'Switch to Suppress'
+          expect(page).to have_content('Updated group and reclassified 0 exceptions.')
+          expect(page).to have_content('Switch to Notify')
+          expect(page).not_to have_content('Switch to Suppress')
+        end
       end
     end
 
     context 'with buttons on exception page' do
       before { visit "/exception_canary/stored_exceptions/#{stored_exception.id}" }
 
-      it 'updates action' do
-        click_on 'Switch to Notify'
-        expect(page).to have_content('Updated group and reclassified 0 exceptions.')
-        expect(page).to have_content('Switch to Suppress')
-        expect(page).not_to have_content('Switch to Notify')
+      context 'no note' do
+        it 'updates action' do
+          click_on 'Switch to Suppress'
+          expect(page).to have_content('Note must be populated when suppressing notifications')
+          fill_in 'Note', with: 'This is a reason'
+          click_on 'Update Group'
+          expect(page).to have_content('Updated group and reclassified 0 exceptions.')
+          expect(page).to have_content('Switch to Notify')
+          expect(page).not_to have_content('Switch to Suppress')
+        end
+      end
+
+      context 'with a note' do
+        before { group.update_attributes(note: 'This is a note') }
+
+        it 'updates action' do
+          click_on 'Switch to Suppress'
+          expect(page).to have_content('Updated group and reclassified 0 exceptions.')
+          expect(page).to have_content('Switch to Notify')
+          expect(page).not_to have_content('Switch to Suppress')
+        end
       end
     end
   end

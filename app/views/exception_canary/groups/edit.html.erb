@@ -3,13 +3,14 @@
 <%= form_for @group do |f| %>
   <% if @group.errors.any? %>
     <div id='error_explanation'>
-      <h2><%= pluralize(@group.errors.count, 'error') %> prohibited
-        this group from being saved:</h2>
-      <ul>
-      <% @group.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+      <div class='alert alert-error'>
+        <%= pluralize(@group.errors.count, 'error') %> prohibited this group from being saved:
+        <ul>
+          <% @group.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+      </div>
     </div>
   <% end %>
   <fieldset>
@@ -24,6 +25,9 @@
 
     <%= f.label :value %>
     <%= f.text_area :value %>
+
+    <%= f.label :note %>
+    <%= f.text_area :note %>
 
     <p>Note: When defining a regex value, you must escape parentheses and other regex operators, e.g. \(StandardError\) not (StandardError)</p>
    
