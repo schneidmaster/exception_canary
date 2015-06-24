@@ -1,6 +1,7 @@
 <% content_for :title, "Stored Exception: #{@stored_exception.title}" %>
 
 <h4><%= @stored_exception.title %></h4>
+<h5>Class: <%= @stored_exception.klass %></h5>
 
 <% if @stored_exception.rule %>
   <hr>
