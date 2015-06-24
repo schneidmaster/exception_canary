@@ -4,6 +4,8 @@ module ExceptionCanary
 
     paginates_per 50
 
+    attr_accessible :title, :backtrace, :environment, :variables, :klass
+
     serialize :environment
     serialize :variables
 
