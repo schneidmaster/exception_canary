@@ -34,7 +34,7 @@ Specifically, check out the [Getting Started](https://github.com/smartinez87/exc
 
 Next, you will need to mount exception_canary's admin interface in your application. This allows you to see and manipulate rules and stored exceptions. exception_canary stores all exceptions in the database to permit you to retroactively search them, apply rules, or recover data if something is being suppressed when it shouldn't be.
 
-Finally, exception_canary needs to know where it lives at so it can generate email links. If you have just mounted it at the root of your application, you don't need to do anything. If exception_canary lives anywhere other than `:exception_canary_url`, you must add the following line to your configuration in each environment:
+Finally, exception_canary needs to know where it lives at so it can generate email links. If you just mount the engine without naming the route, you don't need to do anything. If exception_canary lives anywhere other than `:exception_canary_url` (e.g. you `mount ... as: some_url`), you must add the following line to your configuration in each environment:
 
 ```ruby
 Your::Application.configure do
