@@ -1,4 +1,6 @@
-<h4>Edit group</h4>
+<% content_for :title, 'Edit Group' %>
+
+<h4>Edit Group</h4>
  
 <%= form_for @group do |f| %>
   <% if @group.errors.any? %>
