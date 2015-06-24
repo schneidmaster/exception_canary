@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(:version => 20150615201509) do
 
   create_table "exception_canary_stored_exceptions", :force => true do |t|
     t.integer  "rule_id"
-    t.string   "title"
-    t.string   "backtrace"
-    t.string   "environment"
-    t.string   "variables"
+    t.text     "title"
+    t.text     "backtrace"
+    t.text     "environment"
+    t.text     "variables"
     t.string   "klass"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
