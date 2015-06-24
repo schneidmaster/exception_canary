@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(:version => 20150615201509) do
 
   create_table "exception_canary_rules", :force => true do |t|
-    t.string   "name"
+    t.text     "name"
     t.integer  "action"
     t.integer  "match_type"
-    t.string   "value"
+    t.text     "value"
     t.boolean  "is_auto_generated", :default => true
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
