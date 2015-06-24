@@ -1,6 +1,4 @@
-<% content_for :title, 'Rules' %>
-
-<p><%= link_to 'New Rule', new_rule_path, class: 'btn' %></p>
+<% content_for :title, 'Groups' %>
 
 <table class='table rules'>
   <thead>
@@ -15,7 +13,7 @@
   </thead>
   <tbody>
     <% @rules.each do |rule| %>
-      <tr>
+      <tr class='<%= 'warning' if rule.notify? %>'>
         <td><%= link_to rule.name, rule %></td>
         <td><%= action_name(rule.action) %></td>
         <td><%= match_type_name(rule.match_type) %></td>
