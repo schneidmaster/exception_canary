@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>Timestamp</th>
-      <th>Title</th>
+      <th>Message</th>
       <th>Class</th>
       <% unless defined?(hide_group) && hide_group %>
         <th>Group</th>
@@ -13,7 +13,7 @@
     <% @stored_exceptions.each do |se| %>
       <tr>
         <td><%= link_to format_time(se.created_at), se %></td>
-        <td><%= se.title %></td>
+        <td><%= se.short_title %></td>
         <td><%= se.klass %></td>
         <% unless defined?(hide_group) && hide_group %>
           <td>

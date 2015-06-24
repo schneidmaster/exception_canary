@@ -1,6 +1,7 @@
 <% content_for :title, "Stored Exception: #{@stored_exception.title}" %>
 
-<h4><%= @stored_exception.title %></h4>
+<h4>Exception Message</h4>
+<%= simple_format @stored_exception.title %>
 <h5>Class: <%= @stored_exception.klass %></h5>
 
 <% if @stored_exception.group %>
@@ -10,9 +11,9 @@
   <p>
     Group action: 
     <% if @stored_exception.group.notify? %>
-      <b>Notify</b> <%= link_to 'Switch to Suppress', group_path(@stored_exception.group, group: { action: ExceptionCanary::Group::ACTION_SUPPRESS }), method: :put, class: 'btn' %>
+      <b>Notify</b><br><%= link_to 'Switch to Suppress', group_path(@stored_exception.group, group: { action: ExceptionCanary::Group::ACTION_SUPPRESS }), method: :put, class: 'btn' %>
     <% else %>
-      <b>Suppress</b> <%= link_to 'Switch to Notify', group_path(@stored_exception.group, group: { action: ExceptionCanary::Group::ACTION_NOTIFY }), method: :put, class: 'btn' %>
+      <b>Suppress</b><br><%= link_to 'Switch to Notify', group_path(@stored_exception.group, group: { action: ExceptionCanary::Group::ACTION_NOTIFY }), method: :put, class: 'btn' %>
     <% end %>
   </p>
 <% end %>

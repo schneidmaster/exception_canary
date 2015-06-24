@@ -28,6 +28,19 @@ module ExceptionCanary
       action == ACTION_SUPPRESS
     end
 
+    def exact?
+      match_type == MATCH_TYPE_EXACT
+    end
+
+    def short_value
+      lines = value.split("\n")
+      if lines.count > 0
+        "#{lines.first}..."
+      else
+        lines.first
+      end
+    end
+
     def auto_generated?
       is_auto_generated
     end

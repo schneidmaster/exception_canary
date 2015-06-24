@@ -1,35 +1,39 @@
 <% content_for :title, "Group: #{@group.name}" %>
 
-<h4><%= @group.name %></h4>
+<h4>Name:</h4>
+<%= @group.name %>
 
 <table class='table'>
   <thead>
     <tr>
       <th>Action</th>
       <th>Match Type</th>
-      <th>Value</th>
       <th>Matched Exceptions</th>
+      <th>Most Recent Exception</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>
-        <%= action_name(@group.action) %>
-        <% if @group.notify? %>
-          <%= link_to 'Switch to Suppress', group_path(@group, group: { action: ExceptionCanary::Group::ACTION_SUPPRESS }), method: :put, class: 'btn' %>
-        <% else %>
-          <%= link_to 'Switch to Notify', group_path(@group, group: { action: ExceptionCanary::Group::ACTION_NOTIFY }), method: :put, class: 'btn' %>
-        <% end %>
-      </td>
+      <td><%= action_name(@group.action) %></td>
       <td><%= match_type_name(@group.match_type) %></td>
-      <td><%= @group.value %></td>
       <td><%= @group.exceptions_count %>
+      <td><%= @group.most_recent_exception.nil? ? 'None' : format_time(@group.most_recent_exception) %>
     </tr>
   </tbody>
 </table>
 
+<hr>
+<% if @group.notify? %>
+  <%= link_to 'Switch to Suppress', group_path(@group, group: { action: ExceptionCanary::Group::ACTION_SUPPRESS }), method: :put, class: 'btn' %>
+<% else %>
+  <%= link_to 'Switch to Notify', group_path(@group, group: { action: ExceptionCanary::Group::ACTION_NOTIFY }), method: :put, class: 'btn' %>
+<% end %>
 <%= link_to 'Edit', edit_group_path(@group), class: 'btn' %>
 <%= link_to 'Delete', group_path(@group), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn right' %>
+
+<hr>
+<h4>Exception <%= @group.exact? ? 'Message' : 'Regex' %></h4>
+<%= simple_format @group.value %>
 
 <% unless @group.exceptions_count == 0 %>
   <hr>

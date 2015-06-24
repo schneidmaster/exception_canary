@@ -18,5 +18,14 @@ module ExceptionCanary
         "#{backtrace[0...297]}..."
       end
     end
+
+    def short_title
+      lines = title.split("\n")
+      if lines.count > 0
+        "#{lines.first}..."
+      else
+        lines.first
+      end
+    end
   end
 end
