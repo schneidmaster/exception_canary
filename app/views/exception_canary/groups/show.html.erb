@@ -2,6 +2,13 @@
 
 <h4>Name:</h4>
 <%= @group.name %>
+<hr>
+
+<% if @group.note %>
+  <h4>Note:</h4>
+  <%= @group.note %>
+  <hr>
+<% end %>
 
 <table class='table'>
   <thead>
