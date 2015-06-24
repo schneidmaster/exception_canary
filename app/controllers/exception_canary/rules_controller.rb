@@ -18,6 +18,7 @@ module ExceptionCanary
     end
 
     def create
+      params[:rule][:value].gsub!("\r\n", "\n") if params[:rule][:value]
       @rule = Rule.new(params[:rule].merge(is_auto_generated: false))
       if @rule.save
         reclassified_msg = flash_num_reclassified(reclassify_exceptions)
@@ -33,6 +34,7 @@ module ExceptionCanary
 
     def update
       @rule = Rule.find(params[:id])
+      params[:rule][:value].gsub!("\r\n", "\n") if params[:rule][:value]
       if @rule.update_attributes(params[:rule].merge(is_auto_generated: false))
         reclassified_msg = flash_num_reclassified(reclassify_exceptions)
         redirect_to @rule, flash: { notice: "Updated rule and reclassified #{reclassified_msg}." }

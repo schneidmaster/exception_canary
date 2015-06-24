@@ -21,7 +21,7 @@
     <%= f.select :match_type, ExceptionCanary::Rule::MATCH_TYPES.map { |m| [match_type_name(m), m] } %>
 
     <%= f.label :value %>
-    <%= f.text_field :value %>
+    <%= f.text_area :value %>
 
     <p>Note: When defining a regex value, you must escape parentheses and other regex operators, e.g. \(StandardError\) not (StandardError)</p>
    

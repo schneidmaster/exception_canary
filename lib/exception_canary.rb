@@ -7,6 +7,23 @@ require 'exception_canary/version'
 
 module ExceptionCanary
   class << self
+    def root_url
+      root =
+        if Rails.application.config.respond_to?(:exception_canary_root)
+          Rails.application.config.exception_canary_root
+        else
+          :exception_canary_url
+        end
+
+      if root.is_a? String
+        root
+      else
+        host = Rails.application.config.action_mailer.default_url_options[:host]
+        port = Rails.application.config.action_mailer.default_url_options[:port]
+        Rails.application.routes.url_helpers.send(root, host: host, port: port)
+      end
+    end
+
     def create_exception!(exception, options)
       variables = {}
       unless options[:env].nil? || options[:env]['action_controller.instance'].nil?

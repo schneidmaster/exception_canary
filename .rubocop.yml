@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - db/**/*
     - spec/dummy/db/**/*
+    - lib/exception_canary/exception_notifier.rb
 
 BlockNesting: 
   Max: 4
