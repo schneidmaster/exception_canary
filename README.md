@@ -1,4 +1,4 @@
- [![Build Status](https://travis-ci.org/schneidmaster/exception_canary.svg?branch=master)](https://travis-ci.org/schneidmaster/exception_canary)
+[![Build Status](https://circleci.com/gh/schneidmaster/exception_canary.svg?style=svg)](https://circleci.com/gh/schneidmaster/exception_canary)
 
 # exception_canary
 
