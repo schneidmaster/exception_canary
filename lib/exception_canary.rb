@@ -32,7 +32,9 @@ module ExceptionCanary
           variables[k] = options[:env]['action_controller.instance'].instance_variable_get(k) unless k.include? '@_'
         end
       end
-
+      variables.merge!(env['exception_notifier.exception_data'] || {}) if options[:env]
+      variables.merge!(options[:data]) if options[:data]
+   
       title = "(#{exception.class}) \"#{exception.message}\""
       title = "#{ENV['action_controller.instance']} #{title}" if ENV['action_controller.instance']
       backtrace = exception.backtrace.join("\n") if exception.backtrace
