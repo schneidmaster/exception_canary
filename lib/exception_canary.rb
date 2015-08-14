@@ -35,7 +35,8 @@ module ExceptionCanary
 
       title = "(#{exception.class}) \"#{exception.message}\""
       title = "#{ENV['action_controller.instance']} #{title}" if ENV['action_controller.instance']
-      ExceptionCanary::StoredException.create! title: title, backtrace: exception.backtrace.join("\n"), environment: ENV.to_hash, variables: variables, klass: exception.class.to_s
+      backtrace = exception.backtrace.join("\n") if exception.backtrace
+      ExceptionCanary::StoredException.create! title: title, backtrace: backtrace, environment: ENV.to_hash, variables: variables, klass: exception.class.to_s
     end
 
     def suppress_exception?(se)
