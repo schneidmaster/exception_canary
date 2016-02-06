@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'calculated_attributes'
-  spec.add_dependency 'exception_notification', '~> 4.1.1'
+  spec.add_dependency 'exception_notification', '~> 4.0.1'
   spec.add_dependency 'exception_notification-rake', '~> 0.1.2'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'kaminari', '0.15.1'
