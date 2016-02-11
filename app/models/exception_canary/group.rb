@@ -34,12 +34,7 @@ module ExceptionCanary
     end
 
     def short_value
-      lines = value.split("\n")
-      if lines.count > 0
-        "#{lines.first}..."
-      else
-        lines.first
-      end
+      lines = value.split("\n").first
     end
 
     def auto_generated?

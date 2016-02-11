@@ -5,7 +5,7 @@ module ExceptionCanary
     def index
       base =
         if params[:term].present?
-          StoredException.search(params[:term])
+          StoredException.exception_search(params[:term])
         else
           StoredException
         end

@@ -1,4 +1,4 @@
-class ExceptionNotifier
+class EcExceptionNotifier
   class Notifier < ActionMailer::Base
     def exception_notification(env, exception, options = {})
       e = ExceptionCanary.create_exception!(exception, options)
@@ -30,7 +30,7 @@ class ExceptionNotifier
 
       load_custom_views
 
-      if @notifier = Rails.application.config.middleware.detect { |x| x.klass == ExceptionNotifier }
+      if @notifier = Rails.application.config.middleware.detect { |x| x.klass == EcExceptionNotifier }
         @options   = options.reverse_merge(@notifier.args.first || {}).reverse_merge(self.class.default_options)
         @exception = exception
         @se        = e

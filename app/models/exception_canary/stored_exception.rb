@@ -9,7 +9,7 @@ module ExceptionCanary
     serialize :environment
     serialize :variables
 
-    scope :search, -> (term) { where('title LIKE ?', "%#{term}%") }
+    scope :exception_search, -> (term) { where('title LIKE ?', "%#{term}%") }
 
     def backtrace_summary
       if backtrace.length < 300
@@ -20,12 +20,7 @@ module ExceptionCanary
     end
 
     def short_title
-      lines = title.split("\n")
-      if lines.count > 0
-        "#{lines.first}..."
-      else
-        lines.first
-      end
+      title.split("\n").first
     end
   end
 end
